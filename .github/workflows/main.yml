@@ -61,7 +61,7 @@ jobs:
           -DCMAKE_BUILD_TYPE=Release \
           -DIREE_BUILD_TESTS=OFF \
           -DIREE_BUILD_SAMPLES=OFF \
-          -DBENCHMARK=OFF \
+          -DBENCHMARK=OFF \ 
           
         cmake --build ../iree-build/ --target help  
         cmake --build ../iree-build/ --target install -j 8
