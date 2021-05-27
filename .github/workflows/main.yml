@@ -55,12 +55,12 @@ jobs:
         git clone --depth 1 https://github.com/google/iree.git
         cd iree
         git submodule update --init --depth 1
-        cmake -B ../iree-build/ -DCMAKE_BUILD_TYPE=RelWithDebInfo .
         cmake -B ../iree-build/ \
           -DCMAKE_INSTALL_PREFIX=../iree-build/install \
           -DCMAKE_BUILD_TYPE=Release \
           -DIREE_BUILD_TESTS=OFF \
           -DIREE_BUILD_SAMPLES=OFF \
+          -DBENCHMARK=OFF \
           
         cmake --build ../iree-build/ --target help  
         cmake --build ../iree-build/ --target install
