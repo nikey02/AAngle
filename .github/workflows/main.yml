@@ -34,21 +34,21 @@ jobs:
           sudo apt autoremove -yq
           echo "Free space:"
           df -h
+    - name: ndk
+      uses: actions/checkout@v2
+      uses: nttld/setup-ndk@v1
+      id: setup-ndk
+      with:
+        ndk-version: r21e
+        add-to-path: true
+      run: ./build.sh
+      env:
+        ANDROID_NDK_HOME: ${{ steps.setup-ndk.outputs.ndk-path }}
+    
     - name: Set up Python 2.x
       uses: actions/setup-python@v2
       with:
         python-version: '2.x'
-    
-    steps:
-      - uses: actions/checkout@v2
-      - uses: nttld/setup-ndk@v1
-        id: setup-ndk
-        with:
-          ndk-version: r21e
-          add-to-path: false
-      - run: ./build.sh
-        env:
-          ANDROID_NDK_HOME: ${{ steps.setup-ndk.outputs.ndk-path }}
     
     - name: Prepare
       run: |
