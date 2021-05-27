@@ -14,12 +14,12 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-latest
     steps:
     - name: Maximize build space
       uses: easimon/maximize-build-space@v4
       with:
-          root-reserve-mb: 512   
+          root-reserve-mb: 1024
           swap-size-mb: 1024
           remove-dotnet: 'true'
           remove-haskell: 'true'
@@ -62,6 +62,7 @@ jobs:
           -DIREE_BUILD_TESTS=OFF \
           -DIREE_BUILD_SAMPLES=OFF \
           
+        cmake --build ../iree-build/ --target help  
         cmake --build ../iree-build/ --target install
         
         cmake -B ../iree-build-android/ \
