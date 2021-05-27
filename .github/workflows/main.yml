@@ -55,6 +55,7 @@ jobs:
         git clone --depth 1 https://github.com/google/iree.git
         cd iree
         git submodule update --init --depth 1
+        sed -i '3i #include <limits>' third_party/benchmark/src/benchmark_register.h
         cmake -B ../iree-build/ \
           -DCMAKE_INSTALL_PREFIX=../iree-build/install \
           -DCMAKE_BUILD_TYPE=Release \
