@@ -61,7 +61,8 @@ jobs:
           -DCMAKE_BUILD_TYPE=Release \
           -DIREE_BUILD_TESTS=OFF \
           -DIREE_BUILD_SAMPLES=OFF \
-          -DBENCHMARK=OFF \ 
+          -DCMAKE_BUILD_PARALLEL_LEVEL=8 \
+          .
           
         cmake --build ../iree-build/ --target help  
         cmake --build ../iree-build/ --target install -j 8
@@ -73,6 +74,7 @@ jobs:
           -DANDROID_PLATFORM="android-29" \
           -DIREE_BUILD_COMPILER=ON \
           -DCMAKE_INSTALL_PREFIX=../iree-build-android/install \
+          -DCMAKE_BUILD_PARALLEL_LEVEL=8 \
           .
         cmake --build ../iree-build-android --target install -j 8
         tar -cvJf ~/iree.tar.gz ../iree-build-android/install
