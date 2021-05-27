@@ -61,10 +61,10 @@ jobs:
           -DCMAKE_BUILD_TYPE=Release \
           -DIREE_BUILD_TESTS=OFF \
           -DIREE_BUILD_SAMPLES=OFF \
-          -DBENCHMARK=OFF \
+          -DBENCHMARK=OFF \ 
           
         cmake --build ../iree-build/ --target help  
-        cmake --build ../iree-build/ --target install
+        cmake --build ../iree-build/ --target install -j 8
         
         cmake -B ../iree-build-android/ \
           -DCMAKE_TOOLCHAIN_FILE="/tmp/ndk/android-ndk-r21d/build/cmake/android.toolchain.cmake" \
@@ -72,9 +72,8 @@ jobs:
           -DANDROID_ABI="arm64-v8a" \
           -DANDROID_PLATFORM="android-29" \
           -DIREE_BUILD_COMPILER=ON \
-          -DCMAKE_INSTALL_PREFIX=../iree-build-android/install
-          .
-        cmake --build ../iree-build-android --target install
+          -DCMAKE_INSTALL_PREFIX=../iree-build-android/install .
+        cmake --build ../iree-build-android --target install -j 8
         tar -cvJf ~/iree.tar.gz ../iree-build-android/install
     - name: upload
       uses: actions/upload-artifact@v2
