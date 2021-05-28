@@ -74,6 +74,7 @@ jobs:
           -DIREE_BUILD_COMPILER=ON \
           -DIREE_BUILD_TESTS=OFF \
           -DIREE_BUILD_SAMPLES=OFF \
+          -DIREE_ENABLE_MLIR=OFF \
           -DCMAKE_INSTALL_PREFIX=../iree-build-android/install \
           .
           
