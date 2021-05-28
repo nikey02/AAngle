@@ -56,7 +56,7 @@ jobs:
         cd iree
         git submodule update --init --depth 1
         sed -i '3i #include <limits>' third_party/benchmark/src/benchmark_register.h
-        cmake -G Ninja ../iree-build/ \
+        cmake -B ../iree-build/ \
           -DCMAKE_INSTALL_PREFIX=../iree-build/install \
           -DCMAKE_BUILD_TYPE=Release \
           -DIREE_BUILD_TESTS=OFF \
@@ -64,10 +64,9 @@ jobs:
           .
           
         cmake --build ../iree-build/ --target help  
-        ninja ../iree-build -j 16 
-        ninja ../iree-build install 
+        cmake --build ../iree-build/ --target install
         
-        cmake -G Ninja ../iree-build-android/ \
+        cmake -B ../iree-build-android/ \
           -DCMAKE_TOOLCHAIN_FILE="/tmp/ndk/android-ndk-r21d/build/cmake/android.toolchain.cmake" \
           -DIREE_HOST_BINARY_ROOT="$PWD/../iree-build/install" \
           -DANDROID_ABI="arm64-v8a" \
@@ -77,8 +76,8 @@ jobs:
           -DIREE_BUILD_SAMPLES=OFF \
           -DCMAKE_INSTALL_PREFIX=../iree-build-android/install \
           .
-        ninja ../iree-build-android -j 16
-        ninja ../iree-build-android install
+          
+        cmake --build ../iree-build-android --target install
         tar -cvJf ~/iree.tar.gz ../iree-build-android/install
     - name: upload
       uses: actions/upload-artifact@v2
