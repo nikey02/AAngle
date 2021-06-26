@@ -46,9 +46,11 @@ jobs:
       run: |
         git clone https://chromium.googlesource.com/chromium/tools/depot_tools.git
         export PATH="$PATH:$PWD/depot_tools"
-        mkdir ~/chromium && cd ~/chromium
-        fetch --nohooks --no-history android
-        cd src
+        git clone https://chromium.googlesource.com/angle/angle --depth 1
+        cd angle
+        python scripts/bootstrap.py
+        gclient sync
+        git checkout master
         echo "target_os = [ 'android' ]" >> ../.gclient
         gclient sync
         sudo ./build/install-build-deps-android.sh
