@@ -18,7 +18,7 @@ jobs:
     steps:
     - name: install repo
       run: |
-        apt install repo -y
+        sudo apt install repo -y
         mkdir android-games-sdk
         cd android-games-sdk
         repo init -u https://android.googlesource.com/platform/manifest -b android-games-sdk
