@@ -18,7 +18,10 @@ jobs:
     steps:
     - name: install repo
       run: |
-        sudo apt install repo -y
+        mkdir -p ~/.bin
+        PATH="${HOME}/.bin:${PATH}"
+        curl https://storage.googleapis.com/git-repo-downloads/repo > ~/.bin/repo
+        chmod a+rx ~/.bin/repo
         mkdir android-games-sdk
         cd android-games-sdk
         repo init -u https://android.googlesource.com/platform/manifest -b android-games-sdk
