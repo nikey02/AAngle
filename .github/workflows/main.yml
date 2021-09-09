@@ -26,7 +26,7 @@ jobs:
         cd android-games-sdk
         repo init -u https://android.googlesource.com/platform/manifest -b android-games-sdk
 
-        repo sync -cvp -j8
+        repo sync -c -v -j8
         ls -lah
         cd gamesdk
         tree -L 5
