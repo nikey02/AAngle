@@ -26,9 +26,15 @@ jobs:
         cd android-games-sdk
         repo init -u https://android.googlesource.com/platform/manifest -b android-games-sdk
 
+    - name: repo sync
+      run: |
         repo sync -c -v -j8
+    - name: tree
+      run : |
         ls -lah
+        tree -L 6
+    - name: build
+      run : |
         cd gamesdk
-        tree -L 5
         ANDROID_HOME=`pwd`/../prebuilts/sdk ./gradlew packageZip -d -Plibraries=swappy,tuningfork
 
