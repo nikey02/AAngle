@@ -16,41 +16,9 @@ jobs:
   build-v8:
     runs-on: ubuntu-latest
     steps:
-    - name: Maximize build space
-      uses: easimon/maximize-build-space@v4
-      with:
-          root-reserve-mb: 512   
-          swap-size-mb: 1024
-          remove-dotnet: 'true'
-          remove-haskell: 'true'
-          remove-android: 'true'
-    - name: Checkout
-      uses: actions/checkout@v2
-    - name: Echo Free space
+    - name: install repo
       run: |
-          
-          sudo apt purge -yq $(dpkg -l | grep '^ii' | awk '{ print $2 }' | grep -P '(cabal-|dotnet-|ghc-|libmono|php)') \
-          liblldb-6.0 libllvm6.0:amd64 mono-runtime-common monodoc-manual powershell ruby
-          sudo rm -rf /opt/az /usr/local /usr/share/dotnet
-          sudo apt autoremove -yq
-          echo "Free space:"
-          df -h
-    - name: Set up Python 2.x
-      uses: actions/setup-python@v2
-      with:
-        python-version: '2.x'
-    - name: Prepare
-      run: |
-        sudo apt-get install bzip2 libexpat-dev libc6-dev-i386 
-    - name: Get Resource
-      run: |
-        git clone https://chromium.googlesource.com/chromium/tools/depot_tools.git
-        export PATH="$PATH:$PWD/depot_tools"
-        git clone https://chromium.googlesource.com/angle/angle --depth 1
-        cd angle
-        python scripts/bootstrap.py
-        gclient sync
-        git checkout master
-        echo "target_os = [ 'android' ]" >> ../.gclient
-        gclient sync
-        sudo ./build/install-build-deps-android.sh
+        apt install repo -y
+        mkdir android-games-sdk
+        cd android-games-sdk
+        repo init -u https://android.googlesource.com/platform/manifest -b android-games-sdk
