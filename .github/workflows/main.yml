@@ -31,7 +31,11 @@ jobs:
         repo init --depth=1 -u https://android.googlesource.com/platform/manifest -b llvm-toolchain
         repo sync -f --force-sync --no-clone-bundle -c -j4
 
-        rm -vrf llvm-toolchain/prebuilts/clang/host/linux-x86/clang-bootstrap
+        ls
+        pwd
+
+        rm -vrf llvm-toolchain/prebuilts/clang/host/linux-x86/clang-bootstrap/*
         unzip android-ndk-r23-linux.zip -d llvm-toolchain/prebuilts/clang/host/linux-x86/clang-bootstrap
+
 
 
