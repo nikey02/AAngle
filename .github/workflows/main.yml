@@ -36,6 +36,7 @@ jobs:
 
         rm -vrf prebuilts/clang/host/linux-x86/clang-bootstrap
         unzip android-ndk-r23-linux.zip -d prebuilts/clang/host/linux-x86/clang-bootstrap
+        python toolchain/llvm_android/build.py --no-build windows --skip-source-setup
 
 
 
