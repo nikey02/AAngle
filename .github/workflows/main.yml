@@ -27,7 +27,7 @@ jobs:
         mkdir llvm-toolchain && cd llvm-toolchain
         pwd
         wget https://dl.google.com/android/repository/android-ndk-r23-linux.zip
-        unzip anandroid-ndk-r23-linux.zip
+        unzip android-ndk-r23-linux.zip
 
         repo init -u https://android.googlesource.com/platform/manifest -b llvm-toolchain
         repo sync -c -j8
