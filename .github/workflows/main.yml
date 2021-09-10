@@ -23,24 +23,13 @@ jobs:
         PATH="${HOME}/.bin:${PATH}"
         curl https://storage.googleapis.com/git-repo-downloads/repo > ~/.bin/repo
         chmod a+rx ~/.bin/repo
-        mkdir android-games-sdk
-        cd android-games-sdk
-        repo init -u https://android.googlesource.com/platform/manifest -b android-games-sdk
 
-    - name: agdk test
-      run: |
-        wget https://dl.google.com/developers/android/agdk/agdk-libraries-2021.1.0.zip 
-        unzip agdk-libraries-2021.1.0.zip
+        mkdir llvm-toolchain && cd llvm-toolchain
+        pwd
+        wget https://dl.google.com/android/repository/android-ndk-r23-linux.zip
+        unzip anandroid-ndk-r23-linux.zip
 
-    - name: repo sync
-      run: |
-        repo sync -c -v -j8
-    - name: tree
-      run : |
-        ls -lah
-        tree -L 6
-    - name: build
-      run : |
-        cd gamesdk
-        ANDROID_HOME=`pwd`/../prebuilts/sdk ./gradlew packageZip -d -Plibraries=swappy,tuningfork
+        repo init -u https://android.googlesource.com/platform/manifest -b llvm-toolchain
+        repo sync -c -j8
+
 
