@@ -34,8 +34,8 @@ jobs:
         ls
         pwd
 
-        rm -vrf llvm-toolchain/prebuilts/clang/host/linux-x86/clang-bootstrap/*
-        unzip android-ndk-r23-linux.zip -d llvm-toolchain/prebuilts/clang/host/linux-x86/clang-bootstrap
+        rm -vrf prebuilts/clang/host/linux-x86/clang-bootstrap
+        unzip android-ndk-r23-linux.zip -d prebuilts/clang/host/linux-x86/clang-bootstrap
 
 
 
